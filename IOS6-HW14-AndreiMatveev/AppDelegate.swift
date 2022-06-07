@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let thirdViewController = AlbumsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         thirdViewController.tabBarItem = UITabBarItem(title: "Альбомы", image: UIImage(systemName: "rectangle.stack.fill"), tag: 2)
+        let albumNavigationController = UINavigationController(rootViewController: thirdViewController)
         
         let fourViewController = UIViewController()
         fourViewController.tabBarItem = UITabBarItem(title: "Поиск", image: UIImage(systemName: "magnifyingglass"), tag: 3)
@@ -32,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tapBarController.setViewControllers([
             firstViewController,
             secondViewController,
-            thirdViewController,
+            albumNavigationController,
             fourViewController
         ], animated: true)
         
