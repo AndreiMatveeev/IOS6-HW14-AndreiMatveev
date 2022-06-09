@@ -6,14 +6,11 @@
 //
 
 import UIKit
-
 enum Sections: Int {
-
      case first = 0
      case second = 1
      case third = 2
  }
-
 class AlbumsCollectionViewController: UICollectionViewController {
    
     // MARK: - Life cycle
@@ -24,12 +21,13 @@ class AlbumsCollectionViewController: UICollectionViewController {
         setupNavigationBar()
     }
     
-    // MARK: - Settings
-    
-    private func setupCollectionView() {
-        view.addSubview(collectionView)
-        collectionView.backgroundColor = .systemBackground
-        collectionView.dataSource = self
+     // MARK: - Settings
+     
+     private func setupCollectionView() {
+         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+         view.addSubview(collectionView)
+         collectionView.backgroundColor = .systemBackground
+         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
         NSLayoutConstraint.activate([
@@ -46,43 +44,63 @@ class AlbumsCollectionViewController: UICollectionViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: addButton)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .automatic
-        title = "Альбомы"
-    }
-    
-    // MARK: - UICollectionViewDataSource, UICollectionViewDeligate
+         title = "Альбомы"
+     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 90
-    }
+     // MARK: - Setup Layout
+     
+     private func createFirstLayout() -> NSCollectionLayoutSection {
+         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .fractionalHeight(1.0))
+         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+         item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .green
-        return cell
-    }
-}
+         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
+                                                heightDimension: .fractionalHeight(0.2))
+         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 2)
 
+         let section = NSCollectionLayoutSection(group: group)
+         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+         section.orthogonalScrollingBehavior = .paging
+
+         return section
+     }
+
+     // MARK: - UICollectionViewDataSource, UICollectionViewDeligate
+
+     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         return 16
+     }
+
+     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+         cell.backgroundColor = .green
+         cell.layer.borderWidth = 1
+         return cell
+     }
+ }
     // MARK: - Extension
-
 private extension AlbumsCollectionViewController {
-
      private func createLayout() -> UICollectionViewLayout {
          let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
                                                              layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-             guard let sectionLayout = Sections(rawValue: sectionIndex) else { return nil }
-             switch sectionLayout {
-             case .first:
-                 return nil
-             case .second:
-                 return nil
-             case .third:
-                 return nil
-             //default:
-                 //return nil
-             }
-         }
-         return layout
-     }
- }
+              guard let sectionLayout = Sections(rawValue: sectionIndex) else { return nil }
+              switch sectionLayout {
+              case .first:
+                  return self.createFirstLayout()
+              case .second:
+                  return nil
+              case .third:
+                  return nil
+              }
+          }
+          let config = UICollectionViewCompositionalLayoutConfiguration()
+          config.interSectionSpacing = 50
+          layout.configuration = config
+
+          return layout
+      }
+  }
+
 
 
