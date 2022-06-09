@@ -27,6 +27,7 @@ class AlbumsCollectionViewController: UICollectionViewController {
     // MARK: - Settings
     
     private func setupCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
@@ -49,15 +50,35 @@ class AlbumsCollectionViewController: UICollectionViewController {
         title = "Альбомы"
     }
     
+    // MARK: - Setup Layout
+    
+    private func createFirstLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
+                                               heightDimension: .fractionalHeight(0.2))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 2)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.orthogonalScrollingBehavior = .paging
+        
+        return section
+    }
+        
     // MARK: - UICollectionViewDataSource, UICollectionViewDeligate
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 90
+        return 16
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
         cell.backgroundColor = .green
+        cell.layer.borderWidth = 1
         return cell
     }
 }
@@ -72,15 +93,17 @@ private extension AlbumsCollectionViewController {
              guard let sectionLayout = Sections(rawValue: sectionIndex) else { return nil }
              switch sectionLayout {
              case .first:
-                 return nil
+                 return self.createFirstLayout()
              case .second:
                  return nil
              case .third:
                  return nil
-             //default:
-                 //return nil
              }
          }
+         let config = UICollectionViewCompositionalLayoutConfiguration()
+         config.interSectionSpacing = 50
+         layout.configuration = config
+         
          return layout
      }
  }
