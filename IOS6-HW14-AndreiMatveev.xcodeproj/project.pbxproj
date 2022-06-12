@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B24EB6A32855E1780043775C /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6A22855E1780043775C /* Formatter+Extensions.swift */; };
+		B24EB6A52855E19D0043775C /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6A42855E19D0043775C /* UIView+Constraints.swift */; };
+		B24EB6A72855E1D40043775C /* UInt+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6A62855E1D40043775C /* UInt+Extensions.swift */; };
+		B24EB6AA2855E34D0043775C /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6A92855E34D0043775C /* AlbumCell.swift */; };
 		B2ABE706284F2EF000A654B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2ABE705284F2EF000A654B7 /* AppDelegate.swift */; };
 		B2ABE70A284F2EF000A654B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2ABE709284F2EF000A654B7 /* ViewController.swift */; };
 		B2ABE70D284F2EF000A654B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2ABE70B284F2EF000A654B7 /* Main.storyboard */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B24EB6A22855E1780043775C /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
+		B24EB6A42855E19D0043775C /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		B24EB6A62855E1D40043775C /* UInt+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Extensions.swift"; sourceTree = "<group>"; };
+		B24EB6A92855E34D0043775C /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		B2ABE702284F2EF000A654B7 /* IOS6-HW14-AndreiMatveev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS6-HW14-AndreiMatveev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ABE705284F2EF000A654B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2ABE709284F2EF000A654B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +45,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B24EB6A12855E14F0043775C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B24EB6A22855E1780043775C /* Formatter+Extensions.swift */,
+				B24EB6A42855E19D0043775C /* UIView+Constraints.swift */,
+				B24EB6A62855E1D40043775C /* UInt+Extensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		B24EB6AB2855EDB00043775C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B2ABE719284F562500A654B7 /* AlbumsCollectionViewController.swift */,
+				B2ABE709284F2EF000A654B7 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B24EB6AE2855EF1F0043775C /* My Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B24EB6A92855E34D0043775C /* AlbumCell.swift */,
+			);
+			path = "My Cell";
+			sourceTree = "<group>";
+		};
 		B2ABE6F9284F2EF000A654B7 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +91,14 @@
 		B2ABE704284F2EF000A654B7 /* IOS6-HW14-AndreiMatveev */ = {
 			isa = PBXGroup;
 			children = (
+				B24EB6AB2855EDB00043775C /* View Controllers */,
+				B24EB6A12855E14F0043775C /* Extension */,
+				B24EB6AE2855EF1F0043775C /* My Cell */,
 				B2ABE705284F2EF000A654B7 /* AppDelegate.swift */,
-				B2ABE709284F2EF000A654B7 /* ViewController.swift */,
 				B2ABE70B284F2EF000A654B7 /* Main.storyboard */,
 				B2ABE70E284F2EF500A654B7 /* Assets.xcassets */,
 				B2ABE710284F2EF500A654B7 /* LaunchScreen.storyboard */,
 				B2ABE713284F2EF500A654B7 /* Info.plist */,
-				B2ABE719284F562500A654B7 /* AlbumsCollectionViewController.swift */,
 			);
 			path = "IOS6-HW14-AndreiMatveev";
 			sourceTree = "<group>";
@@ -139,6 +175,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2ABE70A284F2EF000A654B7 /* ViewController.swift in Sources */,
+				B24EB6A72855E1D40043775C /* UInt+Extensions.swift in Sources */,
+				B24EB6AA2855E34D0043775C /* AlbumCell.swift in Sources */,
+				B24EB6A32855E1780043775C /* Formatter+Extensions.swift in Sources */,
+				B24EB6A52855E19D0043775C /* UIView+Constraints.swift in Sources */,
 				B2ABE706284F2EF000A654B7 /* AppDelegate.swift in Sources */,
 				B2ABE71A284F562500A654B7 /* AlbumsCollectionViewController.swift in Sources */,
 			);

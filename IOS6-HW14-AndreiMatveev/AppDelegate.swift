@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //window = UIWindow(frame: UIScreen.main.bounds)
+        
         let tapBarController = UITabBarController()
         tapBarController.tabBar.backgroundColor = .systemBackground
         
@@ -23,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let secondViewController = UIViewController()
         secondViewController.tabBarItem = UITabBarItem(title: "Для вас", image: UIImage(systemName: "heart.text.square"), tag: 1)
         
-        let thirdViewController = AlbumsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+       let thirdViewController = AlbumsCollectionViewController()
         thirdViewController.tabBarItem = UITabBarItem(title: "Альбомы", image: UIImage(systemName: "rectangle.stack.fill"), tag: 2)
         let albumNavigationController = UINavigationController(rootViewController: thirdViewController)
         
