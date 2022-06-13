@@ -23,14 +23,14 @@ import UIKit
      lazy var namePhotoLabel: UILabel = {
          let lable = UILabel()
          lable.textAlignment = .left
-         lable.font = .systemFont(ofSize: 17)
+         lable.font = .systemFont(ofSize: Metric.namePhotoLabelFont)
          return lable
      }()
 
      lazy var numberPhotosLabel: UILabel = {
          let lable = UILabel()
          lable.textAlignment = .left
-         lable.font = .systemFont(ofSize: 15)
+         lable.font = .systemFont(ofSize: Metric.numberPhotoLabelFont)
          lable.textColor = .gray
          return lable
      }()
@@ -66,4 +66,6 @@ import UIKit
 enum Metric {
     static let indent: CGFloat = 4
     static let photoRadius: CGFloat = 10
+    static let namePhotoLabelFont: CGFloat = 17
+    static let numberPhotoLabelFont: CGFloat = 15
 }

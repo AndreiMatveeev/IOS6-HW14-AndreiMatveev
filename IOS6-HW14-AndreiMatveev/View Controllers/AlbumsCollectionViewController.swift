@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct Item {
-
-    let text: String
-    let image: UIImage?
-    let number: UInt
-}
-
 enum Sections: Int {
     case first = 0
     case second = 1
@@ -23,7 +16,7 @@ enum Sections: Int {
 
 class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate {
     
-    let arrayItems: [[Item]] = [
+    let arrayModels: [[Item]] = [
              [Item(text: "Папка №1", image: UIImage(named: "1-1"), number: 111),
              Item(text: "Папка №2", image: UIImage(named: "2"), number: 222),
              Item(text: "Папка №3", image: UIImage(named: "3"), number: 333),
@@ -85,7 +78,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
                                                      bottom: 0,
                                                      trailing: 8)
             
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95/2),
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.475),
                                                heightDimension: .fractionalWidth(1))
         
         let group = NSCollectionLayoutGroup.vertical( layoutSize: groupSize,
@@ -135,7 +128,7 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return arrayItems[0].count
+            return arrayModels[0].count
         case 1:
             return 0
         case 2:
@@ -150,13 +143,13 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCell.reuseID, for: indexPath) as! AlbumCell
-              let item = arrayItems[indexPath.section][indexPath.row]
+              let item = arrayModels[indexPath.section][indexPath.row]
               switch (indexPath as NSIndexPath).section {
 
               case 0:
                   cell.photoImageView.image = item.image
                   cell.namePhotoLabel.text = item.text
-                  cell.numberPhotosLabel.text = item.number.formattedWithSeparator
+                  cell.numberPhotosLabel.text = "\(item.number)"
                   default:
                       break
                   }
