@@ -207,6 +207,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
             layoutSize:  itemSize,
             subitem: item,
             count: 1)
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
@@ -242,6 +243,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
             layoutSize:  itemSize,
             subitem: item,
             count: 1)
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets.leading = 12
         
