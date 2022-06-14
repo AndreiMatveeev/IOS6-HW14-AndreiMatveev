@@ -32,7 +32,6 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
          Item(text: "Папка №4", image: UIImage(named: "1-1"), number: 444)]
     ]
     
-    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.dataSource = self
