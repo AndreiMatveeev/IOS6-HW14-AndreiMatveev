@@ -29,7 +29,36 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         [Item(text: "Папка №1", image: UIImage(named: "13"), number: 111),
          Item(text: "Папка №2", image: UIImage(named: "14"), number: 222),
          Item(text: "Папка №3", image: UIImage(named: "15"), number: 333),
-         Item(text: "Папка №4", image: UIImage(named: "1-1"), number: 444)]
+         Item(text: "Папка №4", image: UIImage(named: "1-1"), number: 444)],
+        
+        [Item(text: "Видео",
+              image: UIImage(systemName: "video")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 1111),
+         Item(text: "Селфи",
+              image: UIImage(systemName: "person.crop.square")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 2111),
+         Item(text: "Фото Live Photos",
+              image: UIImage(systemName: "livephoto")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 1211),
+         Item(text: "Портреты",
+              image: UIImage(systemName: "cube")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 1121),
+         Item(text: "Панорамы",
+              image: UIImage(systemName: "pano")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 1112),
+         Item(text: "Серии",
+              image: UIImage(systemName: "square.stack.3d.down.right")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 1111),
+         Item(text: "Снимки экрана",
+              image: UIImage(systemName: "camera.viewfinder")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 2111)]
     ]
     
     private lazy var collectionView: UICollectionView = {
@@ -53,6 +82,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
     private func setupCollectionView() {
         collectionView.register(AlbumCell.self, forCellWithReuseIdentifier: AlbumCell.reuseID)
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.reuseID)
+        collectionView.register(TableCell.self, forCellWithReuseIdentifier: TableCell.reuseID)
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -71,9 +101,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         title = "Альбомы"
     }
     
-    // MARK: - Setup Layout
-    
-    // Первая секция
+    // MARK: - First section
     
     private func setupFirstLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -111,7 +139,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         return section
     }
     
-    // Вторая секция
+    // MARK: - Second section
     
     private func setupSecondLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -122,7 +150,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
                                                      bottom: 0,
                                                      trailing: 8)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.475),
-                                               heightDimension: .fractionalWidth(1))
+                                               heightDimension: .fractionalWidth(0.475))
         let group = NSCollectionLayoutGroup.vertical( layoutSize: groupSize,
                                                       subitem: item,
                                                       count: 1)
@@ -130,7 +158,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 0,
                                                         leading: 12,
-                                                        bottom: 0,
+                                                        bottom: 56,
                                                         trailing: 12)
         section.orthogonalScrollingBehavior = .paging
         section.contentInsets.leading = 15
@@ -148,6 +176,39 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         return section
     }
     
+    // MARK: - Third section
+    
+    private func setupThirdLayout() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalWidth(1/8))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 18,
+            leading: 0,
+            bottom: 0,
+            trailing: 0)
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize:  itemSize,
+            subitem: item,
+            count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets.leading = 12
+        
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: itemSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        header.zIndex = Int.max
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    // MARK: - Setup Layout
+    
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
                                                             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -158,7 +219,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
             case .second:
                 return self.setupSecondLayout()
             case .third:
-                return nil
+                return self.setupThirdLayout()
             case .four:
                 return nil
             }
@@ -182,7 +243,7 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
         case 1:
             return arrayModels[1].count
         case 2:
-            return 0
+            return arrayModels[2].count
         case 3:
             return 0
         default:
@@ -192,35 +253,46 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCell.reuseID, for: indexPath) as! AlbumCell
         let item = arrayModels[indexPath.section][indexPath.row]
         switch (indexPath as NSIndexPath).section {
             
         case 0, 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumCell.reuseID, for: indexPath) as! AlbumCell
             cell.photoImageView.image = item.image
             cell.namePhotoLabel.text = item.text
             cell.numberPhotosLabel.text = "\(item.number)"
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCell.reuseID, for: indexPath) as! TableCell
+            cell.iconView.image = item.image
+            cell.nameLabel.text = item.text
+            cell.numberPhotosLabel.text = "\(item.number)"
+            cell.lineSeparators.isHidden = indexPath.row == 7 ? true : false
+            return cell
         default:
             break
         }
-        return cell
+        return UICollectionViewCell()
     }
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.reuseID, for: indexPath) as? HeaderView else {
             return HeaderView()
         }
-
-                switch indexPath.section  {
-                case 0:
-                    headerView.label.text = "Мои альбомы"
-                    headerView.button.text = "Все"
-                case 1:
-                    headerView.label.text = "Общие альбомы"
-                    headerView.button.text = "Все"
-                default:
-                    break
-                }
+        
+        switch indexPath.section  {
+        case 0:
+            headerView.label.text = "Мои альбомы"
+            headerView.button.text = "Все"
+        case 1:
+            headerView.label.text = "Общие альбомы"
+            headerView.button.text = "Все"
+        case 2:
+            headerView.label.text = "Типы медиафайлов"
+            headerView.button.text = nil
+        default:
+            break
+        }
         return headerView
     }
 }
