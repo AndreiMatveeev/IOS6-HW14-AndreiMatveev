@@ -8,7 +8,6 @@
 import UIKit
 
 struct Item {
-
     let text: String
     let image: UIImage?
     let number: UInt
