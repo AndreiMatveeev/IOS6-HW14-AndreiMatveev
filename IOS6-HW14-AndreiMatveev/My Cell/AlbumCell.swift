@@ -9,7 +9,7 @@ import UIKit
 
 class AlbumCell: UICollectionViewCell {
     
-    static let reuseID = "CellId"
+    static let reuseID = "AlbumCellId"
     
     lazy var photoImageView: UIImageView = {
         let imageView = UIImageView()
