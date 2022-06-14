@@ -81,6 +81,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B24EB6B82858D6C80043775C /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				B24EB6B228574B9F0043775C /* Header.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		B2ABE6F9284F2EF000A654B7 = {
 			isa = PBXGroup;
 			children = (
@@ -104,12 +112,12 @@
 				B24EB6A12855E14F0043775C /* Extension */,
 				B24EB6AE2855EF1F0043775C /* My Cell */,
 				B24EB6AF285744420043775C /* Model */,
+				B24EB6B82858D6C80043775C /* Header */,
 				B2ABE70B284F2EF000A654B7 /* Main.storyboard */,
 				B2ABE705284F2EF000A654B7 /* AppDelegate.swift */,
 				B2ABE70E284F2EF500A654B7 /* Assets.xcassets */,
 				B2ABE710284F2EF500A654B7 /* LaunchScreen.storyboard */,
 				B2ABE713284F2EF500A654B7 /* Info.plist */,
-				B24EB6B228574B9F0043775C /* Header.swift */,
 			);
 			path = "IOS6-HW14-AndreiMatveev";
 			sourceTree = "<group>";
