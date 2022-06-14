@@ -58,7 +58,20 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
          Item(text: "Снимки экрана",
               image: UIImage(systemName: "camera.viewfinder")?
             .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
-              number: 2111)]
+              number: 2111)],
+        
+        [Item(text: "Импортированные",
+              image: UIImage(systemName: "square.and.arrow.down")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 10),
+         Item(text: "Скрытые",
+              image: UIImage(systemName: "eye.slash")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 11),
+         Item(text: "Недавно удаленные",
+              image: UIImage(systemName: "trash")?
+            .withTintColor(.systemBlue, renderingMode: .alwaysOriginal),
+              number: 12)]
     ]
     
     private lazy var collectionView: UICollectionView = {
@@ -187,6 +200,41 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 18,
             leading: 0,
+            bottom: 10,
+            trailing: 0)
+        
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize:  itemSize,
+            subitem: item,
+            count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 12,
+            bottom: 30,
+            trailing: 12)
+        section.contentInsets.leading = 12
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: itemSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top)
+        header.zIndex = Int.max
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    // MARK: - Four section
+    
+    private func setupFourLayout() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalWidth(1/8))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 18,
+            leading: 0,
             bottom: 0,
             trailing: 0)
         
@@ -221,7 +269,7 @@ class AlbumsCollectionViewController: UIViewController, UICollectionViewDelegate
             case .third:
                 return self.setupThirdLayout()
             case .four:
-                return nil
+                return self.setupFourLayout()
             }
         }
         return layout
@@ -245,7 +293,7 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
         case 2:
             return arrayModels[2].count
         case 3:
-            return 0
+            return arrayModels[3].count
         default:
             return 0
         }
@@ -269,6 +317,13 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
             cell.numberPhotosLabel.text = "\(item.number)"
             cell.lineSeparators.isHidden = indexPath.row == 7 ? true : false
             return cell
+        case 3:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TableCell.reuseID, for: indexPath) as! TableCell
+            cell.iconView.image = item.image
+            cell.nameLabel.text = item.text
+            cell.numberPhotosLabel.text = "\(item.number)"
+            cell.lineSeparators.isHidden = indexPath.row == 2 ? true : false
+            return cell
         default:
             break
         }
@@ -289,6 +344,9 @@ extension AlbumsCollectionViewController: UICollectionViewDataSource {
             headerView.button.text = "Все"
         case 2:
             headerView.label.text = "Типы медиафайлов"
+            headerView.button.text = nil
+        case 3:
+            headerView.label.text = "Другое"
             headerView.button.text = nil
         default:
             break
