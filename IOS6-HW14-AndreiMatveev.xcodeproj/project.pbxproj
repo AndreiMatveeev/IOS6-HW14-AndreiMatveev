@@ -12,6 +12,7 @@
 		B24EB6B1285744540043775C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6B0285744540043775C /* Model.swift */; };
 		B24EB6B328574B9F0043775C /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6B228574B9F0043775C /* Header.swift */; };
 		B24EB6B5285876EE0043775C /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6B4285876EE0043775C /* UIStackView.swift */; };
+		B24EB6B72858A3DA0043775C /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EB6B62858A3DA0043775C /* TableCell.swift */; };
 		B2ABE706284F2EF000A654B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2ABE705284F2EF000A654B7 /* AppDelegate.swift */; };
 		B2ABE70D284F2EF000A654B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2ABE70B284F2EF000A654B7 /* Main.storyboard */; };
 		B2ABE70F284F2EF500A654B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2ABE70E284F2EF500A654B7 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		B24EB6B0285744540043775C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B24EB6B228574B9F0043775C /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		B24EB6B4285876EE0043775C /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		B24EB6B62858A3DA0043775C /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		B2ABE702284F2EF000A654B7 /* IOS6-HW14-AndreiMatveev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS6-HW14-AndreiMatveev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ABE705284F2EF000A654B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2ABE70C284F2EF000A654B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				B24EB6A92855E34D0043775C /* AlbumCell.swift */,
+				B24EB6B62858A3DA0043775C /* TableCell.swift */,
 			);
 			path = "My Cell";
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			files = (
 				B24EB6B1285744540043775C /* Model.swift in Sources */,
 				B24EB6AA2855E34D0043775C /* AlbumCell.swift in Sources */,
+				B24EB6B72858A3DA0043775C /* TableCell.swift in Sources */,
 				B24EB6A52855E19D0043775C /* UIView+Constraints.swift in Sources */,
 				B2ABE706284F2EF000A654B7 /* AppDelegate.swift in Sources */,
 				B24EB6B328574B9F0043775C /* Header.swift in Sources */,
